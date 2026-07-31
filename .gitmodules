@@ -1,0 +1,9 @@
+[submodule "externals/stb"]
+	path = externals/stb
+	url = https://github.com/nothings/stb
+[submodule "externals/libchdr"]
+	path = externals/libchdr
+	url = https://github.com/JaCzekanski/libchdr
+[submodule "externals/lzma-sdk"]
+	path = externals/lzma-sdk
+	url = https://github.com/jljusten/LZMA-SDK

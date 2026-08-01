@@ -27,7 +27,7 @@ struct Function {
     std::string_view name;
 
     Function(std::function<bool(System*)>, std::string_view);
-    Function(std::string_view argv, std::function<bool(System*)> callback = nullptr);
+    Function(std::string_view, std::function<bool(System*)> = nullptr);
 };
 
 using AFunction = Function;

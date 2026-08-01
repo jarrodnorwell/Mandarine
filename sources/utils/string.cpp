@@ -1,4 +1,5 @@
 #include "utils/string.h"
+
 #include <cstdarg>
 #include <cstdlib>
 #include <cstring>
@@ -6,41 +7,17 @@
 #include <string_view>
 #include <string>
 
-std::vector<std::string_view> split(std::string_view str, std::string_view delim) {
-    std::vector<std::string_view> parts;
+const std::string_view trim(std::string_view input) {
+    while (not input.empty() and std::isspace(input.front()))
+        input.remove_prefix(1);
 
-    std::string_view::size_type pos;
-    std::string_view::size_type lastPos = 0;
-    std::string_view::size_type length = str.length();
+    while (not input.empty() and std::isspace(input.back()))
+        input.remove_suffix(1);
 
-    while (lastPos < length + 1) {
-        pos = str.find(delim, lastPos);
-        if (pos == std::string_view::npos) {
-            pos = length;
-        }
-
-        if (pos != lastPos) {
-            parts.push_back(str.substr(lastPos, pos - lastPos));
-        }
-
-        lastPos = pos + delim.size();
-    }
-    return parts;
+    return input;
 }
 
-std::string_view trim(std::string_view str) {
-    const std::string_view pattern = " \f\n\r\t\v";
-    std::string_view trimmed;
-    if (auto pos = str.find_first_not_of(pattern); pos != std::string_view::npos) {
-        trimmed = str.substr(pos);
-    }
-    if (auto pos = str.find_last_not_of(pattern); pos != std::string_view::npos) {
-        trimmed = str.substr(0, pos + 1);
-    }
-
-    return trimmed;
-}
-
+// TODO: (jarrodnorwell) continue with rewriting the rest of this file
 bool endsWith(const std::string& a, const std::string& b) {
     if (a.length() >= b.length()) {
         return a.compare(a.length() - b.length(), b.length(), b) == 0;

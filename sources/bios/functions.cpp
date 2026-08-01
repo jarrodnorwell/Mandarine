@@ -1,54 +1,56 @@
-#include "bios/functions.h"
-#include <fmt/color.h>
-#include <fmt/core.h>
-#include <magic_enum/magic_enum.hpp>
-#include "debugger/debugger.h"
 #include "system.h"
+#include "bios/functions.h"
+#include "debugger/debugger.h"
 #include "utils/event.h"
 #include "utils/string.h"
 
-namespace bios {
+#include <ranges>
+#include <string_view>
 
-Function::Function(std::string_view prototype, std::function<bool(System* sys)> callback) : callback(callback) {
-    auto argStart = prototype.find('(');
-    auto argEnd = prototype.find(')');
+#include <fmt/color.h>
+#include <fmt/core.h>
+#include <magic_enum/magic_enum.hpp>
 
-    assert(argStart != std::string_view::npos && argEnd != std::string_view::npos);
-    auto sArgs = prototype.substr(argStart + 1, argEnd - argStart - 1);
-    auto args = split(sArgs, ", ");
+bios::Function::Function(std::function<bool(System*)> callback, std::string_view argv) : callback{callback} {
+    const auto& start{argv.find("(")};
+    const auto& end{argv.find(")")};
 
-    this->name = prototype.substr(0, argStart);
-    for (auto sArg : args) {
-        sArg = trim(sArg);
-        auto delim = sArg.find_last_of(' ');
+    assert(start not_eq std::string_view::npos and end not_eq std::string_view::npos);
 
-        if (delim == std::string_view::npos) {
-            throw std::runtime_error(fmt::format("{} -> Invalid parameter without type", prototype));
-        }
+    name = argv.substr(0, start);
 
-        auto sType = trim(sArg.substr(0, delim));
-        auto sName = trim(sArg.substr(delim + 1));
+    for (const auto&& part : std::views::split(argv.substr(start + 1, end - start - 1), ", ")) {
+        const auto& trimmed_part{trim(std::string_view{part})};
 
-        Arg arg;
-        arg.name = sName;
-        arg.type = Type::INT;
+        const auto& delimiter{trimmed_part.find_last_of(" ")};
+        if (delimiter == std::string_view::npos)
+            throw std::runtime_error(fmt::format("[BIOS] Invalid parameter without type: {}", argv));
 
-        if (sType == "int")
-            arg.type = Type::INT;
-        else if (sType == "char")
-            arg.type = Type::CHAR;
-        else if (sType == "const char*" || sType == "char*")
-            arg.type = Type::STRING;
-        else if (sType == "FILE*")
-            arg.type = Type::INT;
-        else if (sType == "void*")
-            arg.type = Type::POINTER;
+        Argument argument;
+
+        const auto& name{trim(trimmed_part.substr(delimiter + 1))};
+        const auto& type{trim(trimmed_part.substr(0, delimiter))};
+
+        if (type == "char")
+            argument.type = Argument::Type::CHARACTER;
+        else if (type == "char*" or type == "const char*")
+            argument.type = Argument::Type::CHARACTER_POINTER;
+        else if (type == "int" or type == "FILE*")
+            argument.type = Argument::Type::INTEGER;
+        else if (type == "void*")
+            argument.type = Argument::Type::POINTER;
         else
-            throw std::runtime_error(fmt::format("{} -> Invalid parameter type", prototype));
+            throw std::runtime_error(fmt::format("[BIOS] Invalid parameter type: {}", argv));
 
-        this->args.push_back(arg);
+        arguments.emplace_back(argument);
     }
 }
+
+bios::Function::Function(std::string_view argv, std::function<bool(System*)> callback) : Function(callback, argv) {};
+
+
+// TODO: (jarrodnorwell) continue with rewriting the rest of this file
+namespace bios {
 
 bool noLog(System* sys) {
     (void)(sys);
@@ -126,7 +128,7 @@ bool unresolvedException(System* sys) {
     return false;
 }
 
-const std::unordered_map<uint8_t, Function> A0 = {
+const std::unordered_map<uint8_t, AFunction> A = {
     {0x00, {"FileOpen(const char* file, int mode)"}},
     {0x01, {"FileSeek(FILE* file, int offset, int origin)"}},
     {0x02, {"FileRead(FILE* file, void* dst, int length)"}},
@@ -275,7 +277,7 @@ const std::unordered_map<uint8_t, Function> A0 = {
     {0xB4, {"GetSystemInfo(int index)"}},
 };
 
-const std::unordered_map<uint8_t, Function> B0 = {
+const std::unordered_map<uint8_t, BFunction> B = {
     {0x00, {"alloc_kernel_memory(int size)"}},
     {0x01, {"free_kernel_memory(void* ptr)"}},
     {0x02, {"init_timer(int t, int reload, int flags)"}},
@@ -360,7 +362,7 @@ const std::unordered_map<uint8_t, Function> B0 = {
     {0x5D, {"wait_card_status(int slot)"}},
 };
 
-const std::unordered_map<uint8_t, Function> C0 = {
+const std::unordered_map<uint8_t, CFunction> C = {
 
     {0x00, {"EnqueueTimerAndVblankIrqs(int priority)"}},
     {0x01, {"EnqueueSyscallHandler(int priority)"}},
@@ -394,13 +396,62 @@ const std::unordered_map<uint8_t, Function> C0 = {
     {0x1D, {"get_card_find_mode()"}},
 };
 
-const std::array<std::unordered_map<uint8_t, Function>, 3> tables = {{A0, B0, C0}};
+const std::array<std::unordered_map<uint8_t, Function>, 3> tables = {{A, B, C}};
 
-const std::unordered_map<uint8_t, Function> SYSCALL = {
+const std::unordered_map<uint8_t, SCFunction> SYSTEM_CALL = {
 
-    {0x00, {"NoFunction()"}},          {0x01, {"EnterCriticalSection()"}},
-    {0x02, {"ExitCriticalSection()"}}, {0x03, {"ChangeThreadSubFunction(int addr)"}},
+    {0x00, {"NoFunction()"}},
+    {0x01, {"EnterCriticalSection()"}},
+    {0x02, {"ExitCriticalSection()"}},
+    {0x03, {"ChangeThreadSubFunction(int addr)"}},
     {0x04, {"DeliverEvent()"}},
 };
 
+}
+
+/*
+namespace bios {
+
+Function::Function(std::string_view prototype, std::function<bool(System* sys)> callback) : callback(callback) {
+    auto argStart = prototype.find('(');
+    auto argEnd = prototype.find(')');
+
+    assert(argStart != std::string_view::npos && argEnd != std::string_view::npos);
+    auto sArgs = prototype.substr(argStart + 1, argEnd - argStart - 1);
+    auto args = split(sArgs, ", ");
+
+    this->name = prototype.substr(0, argStart);
+    for (auto sArg : args) {
+        sArg = trim(sArg);
+        auto delim = sArg.find_last_of(' ');
+
+        if (delim == std::string_view::npos) {
+            throw std::runtime_error(fmt::format("{} -> Invalid parameter without type", prototype));
+        }
+
+        auto sType = trim(sArg.substr(0, delim));
+        auto sName = trim(sArg.substr(delim + 1));
+
+        Arg arg;
+        arg.name = sName;
+        arg.type = Type::INT;
+
+        if (sType == "int")
+            arg.type = Type::INT;
+        else if (sType == "char")
+            arg.type = Type::CHAR;
+        else if (sType == "const char*" || sType == "char*")
+            arg.type = Type::STRING;
+        else if (sType == "FILE*")
+            arg.type = Type::INT;
+        else if (sType == "void*")
+            arg.type = Type::POINTER;
+        else
+            throw std::runtime_error(fmt::format("{} -> Invalid parameter type", prototype));
+
+        this->args.push_back(arg);
+    }
+}
+
 };  // namespace bios
+*/

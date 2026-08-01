@@ -84,19 +84,19 @@ struct System {
     std::vector<std::unique_ptr<device::timer::Timer>> timers;
     
     template <typename T>
-    constexpr T fast_read(uint8_t*, uint32_t);
+    constexpr T fast_read(const uint8_t*, uint32_t);
     
     template <typename T>
     constexpr void fast_write(uint8_t*, uint32_t, T);
     
     template <typename T, typename Peripheral>
-    constexpr std::optional<T> read_peripheral(Peripheral&, uint32_t);
+    constexpr std::optional<T> read_peripheral(const Peripheral&, uint32_t);
     
     template <typename T, typename Peripheral>
     constexpr void write_peripheral(Peripheral&, uint32_t, T);
     
     template<typename T, typename Peripheral>
-    constexpr std::optional<T> read_io(uint32_t, uint32_t, uint32_t, Peripheral&);
+    constexpr std::optional<T> read_io(uint32_t, uint32_t, uint32_t, const Peripheral&);
     
     template<typename T, typename Peripheral>
     constexpr bool write_io(uint32_t, T, uint32_t, uint32_t, Peripheral&);
@@ -112,18 +112,19 @@ struct System {
     using PeripheralTypes = std::variant<device::dma::DMA*, Expansion2*, gpu::GPU*, Interrupt*, mdec::MDEC*, MemoryControl*, RamControl*, CacheControl*, Serial*>;
     
     template <typename Peripheral>
-    constexpr void reset_peripheral(Peripheral&);
+    constexpr void reset_peripheral(const Peripheral&);
     
     constexpr bool reset(bool /* soft */ = true);
     
     bool load(const std::string& /* path */);
-    bool load(const std::vector<uint8_t>& /* data */, const bool /* is_exe */ = false);
+    bool load(const std::vector<uint8_t>& /* data */, bool /* is_exe */ = false);
     
-    enum HandleType : uint32_t { BIOS = 0, SYSTEM_CALL = 1 };
+    enum class HandleType { BIOS, SYSTEM_CALL };
     void handle(HandleType);
 
+    // TODO: (jarrodnorwell) continue with rewriting the rest of this file
     System();
-    void printFunctionInfo(const char* functionNum, const bios::Function& f);
+    void printFunctionInfo(const char*, bios::Function);
     void emulateFrame();
     bool isSystemReady();
 

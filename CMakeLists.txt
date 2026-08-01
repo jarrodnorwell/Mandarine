@@ -61,6 +61,7 @@ add_library(chdr STATIC
 target_include_directories(chdr PUBLIC externals/libchdr/src)
 target_link_libraries(chdr FLAC lzma miniz zlib)
 
+set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 

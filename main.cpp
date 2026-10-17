@@ -1,5 +1,4 @@
 #include "system.h"
-#include "sound/sound.h"
 
 #include <deque>
 #include <filesystem>
@@ -73,22 +72,6 @@ size_t getFileSize(const std::string &path)
 {
     return std::filesystem::file_size(path);
 }
-
-namespace Sound
-{
-    std::deque<uint16_t> buffer;
-    std::mutex audioMutex;
-};
-
-void Sound::init() {}
-
-void Sound::play() {}
-
-void Sound::stop() {}
-
-void Sound::close() {}
-
-void Sound::clearBuffer() {}
 
 int main(int argc, char *argv[])
 {

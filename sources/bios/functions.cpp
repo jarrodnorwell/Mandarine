@@ -11,38 +11,48 @@
 #include <fmt/core.h>
 #include <magic_enum/magic_enum.hpp>
 
-bios::Function::Function(std::function<bool(System*)> callback, std::string_view argv) : callback{callback} {
-    const auto& start{argv.find("(")};
-    const auto& end{argv.find(")")};
+bios::Function::Function(std::function<bool(System*)> callback, std::string_view argv) : callback{std::move(callback)} {
+    const auto start = argv.find('(');
+    const auto end = argv.rfind(')');
+    
+    if (start == std::string_view::npos || end == std::string_view::npos || end < start)
+        throw std::runtime_error(fmt::format("[BIOS] Invalid function declaration: {}", argv));
+    
+    name = trim(argv.substr(0, start));
+    
+    const auto parameters = argv.substr(start + 1, end - start - 1);
+    
+    if (trim(parameters).empty())
+        return;
+    
+    for (const auto&& part : std::views::split(parameters, ',')) {
+        auto parameter = trim(std::string_view{part});
 
-    assert(start not_eq std::string_view::npos and end not_eq std::string_view::npos);
-
-    name = argv.substr(0, start);
-
-    for (const auto&& part : std::views::split(argv.substr(start + 1, end - start - 1), ", ")) {
-        const auto& trimmed_part{trim(std::string_view{part})};
-
-        const auto& delimiter{trimmed_part.find_last_of(" ")};
+        const auto delimiter = parameter.find_last_of(" \t");
         if (delimiter == std::string_view::npos)
             throw std::runtime_error(fmt::format("[BIOS] Invalid parameter without type: {}", argv));
-
+        
+        const auto type = trim(parameter.substr(0, delimiter));
+        const auto name = trim(parameter.substr(delimiter + 1));
+        
+        if (type.empty() || name.empty())
+            throw std::runtime_error(fmt::format("[BIOS] Invalid parameter: {}", argv));
+        
         Argument argument;
-
-        const auto& name{trim(trimmed_part.substr(delimiter + 1))};
-        const auto& type{trim(trimmed_part.substr(0, delimiter))};
-
+        argument.name = name;
+        
         if (type == "char")
             argument.type = Argument::Type::CHARACTER;
-        else if (type == "char*" or type == "const char*")
+        else if (type == "char*" || type == "const char*")
             argument.type = Argument::Type::CHARACTER_POINTER;
-        else if (type == "int" or type == "FILE*")
+        else if (type == "int" || type == "FILE*")
             argument.type = Argument::Type::INTEGER;
         else if (type == "void*")
             argument.type = Argument::Type::POINTER;
         else
-            throw std::runtime_error(fmt::format("[BIOS] Invalid parameter type: {}", argv));
-
-        arguments.emplace_back(argument);
+            throw std::runtime_error(fmt::format("[BIOS] Invalid parameter type '{}' in: {}", type, argv));
+        
+        arguments.emplace_back(std::move(argument));
     }
 }
 

@@ -176,6 +176,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
 
     # SOUND
     ${CMAKE_CURRENT_SOURCE_DIR}/sources/sound/adpcm.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/sources/sound/sound.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/sources/sound/tables.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/sources/sound/wave.cpp
 
@@ -194,6 +195,6 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
 
     ${CMAKE_CURRENT_SOURCE_DIR}/sources/config.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/sources/stdafx.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/sources/system_tools.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/sources/system.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/sources/tools.cpp
 )

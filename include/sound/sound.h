@@ -1,26 +1,32 @@
+//
+//  sound.h
+//  Mandarine
+//
+//  Created by Jarrod Norwell on 17/10/2026.
+//
+
 #pragma once
+
+#include "device/spu/spu.h"
+
 #include <cstdint>
 #include <deque>
 #include <iterator>
 #include <mutex>
 
-namespace Sound {
-extern std::deque<uint16_t> buffer;
-extern std::mutex audioMutex;
+namespace sound {
+    extern std::deque<uint16_t> buffer;
+    extern std::mutex mutex;
 
-void init();
-void play();
-void stop();
-void close();
-void clearBuffer();
+    template <typename Iterator>
+    void append(const Iterator& start, const Iterator& end) {
+        std::unique_lock<std::mutex> lock{sound::mutex};
 
-template <typename Iterator>
-void appendBuffer(const Iterator& start, const Iterator& end) {
-    std::unique_lock<std::mutex> lock(audioMutex);
+        if (sound::buffer.size() > constants::sound::SIZE)
+            sound::buffer.clear();
 
-    if (buffer.size() > 512 * 32) {
-        buffer.clear();
+        sound::buffer.insert(sound::buffer.end(), start, end);
     }
-    buffer.insert(buffer.end(), start, end);
-}
-};  // namespace Sound
+
+    void clear(), close(), init(), play(), stop();
+} // namespace sound

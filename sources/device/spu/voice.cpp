@@ -1,8 +1,31 @@
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/device/spu/voice.h"
+#include "avocado/sound/adpcm.h"
+#include "avocado/utils/math.h"
+
+#else
+
 #include "device/spu/voice.h"
-#include <algorithm>
-#include <cmath>
 #include "sound/adpcm.h"
 #include "utils/math.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "device/spu/voice.h"
+#include "sound/adpcm.h"
+#include "utils/math.h"
+
+#endif // __APPLE__
+
+#include <algorithm>
+#include <cmath>
 
 namespace spu {
 Voice::Voice() {

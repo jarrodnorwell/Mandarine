@@ -1,4 +1,5 @@
 {
     "editor.formatOnSave": false,
-    "explorer.excludeGitIgnore": true
+    "explorer.excludeGitIgnore": true,
+    "chat.agent.enabled": false
 }

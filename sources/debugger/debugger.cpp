@@ -1,7 +1,27 @@
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/debugger/debugger.h"
+
+#else
+
 #include "debugger/debugger.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "debugger/debugger.h"
+
+#endif // __APPLE__
+
 #include <fmt/core.h>
 #include <fmt/format.h>
 #include <fmt/format-inl.h>
+
 #include <array>
 
 namespace debugger {

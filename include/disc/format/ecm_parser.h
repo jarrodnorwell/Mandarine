@@ -1,9 +1,31 @@
 #pragma once
+
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/disc/disc.h"
+#include "avocado/disc/format/ecm.h"
+
+#else
+
+#include "disc/disc.h"
+#include "disc/format/ecm.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "disc/disc.h"
+#include "disc/format/ecm.h"
+
+#endif // __APPLE__
+
 #include <cstdio>
 #include <memory>
 #include <vector>
-#include "disc/disc.h"
-#include "disc/format/ecm.h"
 
 namespace disc::format {
 class EcmParser {

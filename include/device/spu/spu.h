@@ -1,9 +1,35 @@
 #pragma once
-#include <array>
+
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/device/device.h"
+#include "avocado/device/spu/noise.h"
+#include "avocado/device/spu/regs.h"
+#include "avocado/device/spu/voice.h"
+
+#else
+
 #include "device/device.h"
 #include "device/spu/noise.h"
 #include "device/spu/regs.h"
 #include "device/spu/voice.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "device/device.h"
+#include "device/spu/noise.h"
+#include "device/spu/regs.h"
+#include "device/spu/voice.h"
+
+#endif // __APPLE__
+
+#include <array>
 
 struct System;
 

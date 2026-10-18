@@ -1,6 +1,26 @@
 #pragma once
-#include <vector>
+
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/utils/cd.h"
+
+#else
+
 #include "utils/cd.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "utils/cd.h"
+
+#endif // __APPLE__
+
+#include <vector>
 
 namespace ADPCM {
 enum Flag {

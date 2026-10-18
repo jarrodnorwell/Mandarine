@@ -1,7 +1,31 @@
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/device/gpu/primitive.h"
+#include "avocado/device/gpu/render/render.h"
+#include "avocado/device/gpu/render/texture_utils.h"
+#include "avocado/utils/macros.h"
+
+#else
+
 #include "device/gpu/primitive.h"
 #include "device/gpu/render/render.h"
 #include "device/gpu/render/texture_utils.h"
 #include "utils/macros.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "device/gpu/primitive.h"
+#include "device/gpu/render/render.h"
+#include "device/gpu/render/texture_utils.h"
+#include "utils/macros.h"
+
+#endif // __APPLE__
 
 #undef VRAM
 #define VRAM ((uint16_t(*)[gpu::VRAM_WIDTH])gpu->vram.data())

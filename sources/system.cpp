@@ -1,14 +1,47 @@
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/config.h"
+#include "avocado/system.h"
+#include "avocado/bios/functions.h"
+#include "avocado/sound/sound.h"
+#include "avocado/utils/address.h"
+#include "avocado/utils/file.h"
+#include "avocado/utils/gpu_draw_list.h"
+#include "avocado/utils/psx_exe.h"
+
+#else
+
+#include "config.h"
 #include "system.h"
+#include "bios/functions.h"
+#include "sound/sound.h"
+#include "utils/address.h"
+#include "utils/file.h"
+#include "utils/gpu_draw_list.h"
+#include "utils/psx_exe.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "config.h"
+#include "system.h"
+#include "bios/functions.h"
+#include "sound/sound.h"
+#include "utils/address.h"
+#include "utils/file.h"
+#include "utils/gpu_draw_list.h"
+#include "utils/psx_exe.h"
+
+#endif // __APPLE__
+
 #include <fmt/core.h>
 #include <fmt/format.h>
 #include <fmt/format-inl.h>
-#include "bios/functions.h"
-#include "config.h"
-#include "sound/sound.h"
-#include "utils/address.h"
-#include "utils/gpu_draw_list.h"
-#include "utils/file.h"
-#include "utils/psx_exe.h"
 
 #include <variant>
 #include <vector>

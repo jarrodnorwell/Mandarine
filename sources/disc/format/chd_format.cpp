@@ -1,8 +1,32 @@
-#include "disc/format/chd_format.h"
-#include <fmt/core.h>
-#include <cstring>
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/disc/track.h"
+#include "avocado/disc/format/chd_format.h"
+#include "avocado/utils/file.h"
+
+#else
+
 #include "disc/track.h"
+#include "disc/format/chd_format.h"
 #include "utils/file.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "disc/track.h"
+#include "disc/format/chd_format.h"
+#include "utils/file.h"
+
+#endif // __APPLE__
+
+#include <fmt/core.h>
+
+#include <cstring>
 
 namespace disc {
 namespace format {

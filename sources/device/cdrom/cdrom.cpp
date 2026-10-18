@@ -1,15 +1,48 @@
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/config.h"
+#include "avocado/system.h"
+#include "avocado/device/cdrom/cdrom.h"
+#include "avocado/disc/empty.h"
+#include "avocado/disc/track.h"
+#include "avocado/sound/adpcm.h"
+#include "avocado/utils/bcd.h"
+#include "avocado/utils/cd.h"
+
+#else
+
+#include "config.h"
+#include "system.h"
 #include "device/cdrom/cdrom.h"
+#include "disc/empty.h"
+#include "disc/track.h"
+#include "sound/adpcm.h"
+#include "utils/bcd.h"
+#include "utils/cd.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "config.h"
+#include "system.h"
+#include "device/cdrom/cdrom.h"
+#include "disc/empty.h"
+#include "disc/track.h"
+#include "sound/adpcm.h"
+#include "utils/bcd.h"
+#include "utils/cd.h"
+
+#endif // __APPLE__
+
 #include <fmt/core.h>
 #include <fmt/format.h>
 #include <fmt/format-inl.h>
 #include <cassert>
-#include "disc/track.h"
-#include "config.h"
-#include "disc/empty.h"
-#include "sound/adpcm.h"
-#include "system.h"
-#include "utils/bcd.h"
-#include "utils/cd.h"
 
 namespace device {
 namespace cdrom {

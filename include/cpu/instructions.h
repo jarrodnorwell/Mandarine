@@ -1,8 +1,30 @@
 #pragma once
-#include <array>
-#include <cstdint>
+
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/cpu/cpu.h"
+#include "avocado/cpu/opcode.h"
+
+#else
+
 #include "cpu/cpu.h"
 #include "cpu/opcode.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "cpu/cpu.h"
+#include "cpu/opcode.h"
+
+#endif // __APPLE__
+
+#include <array>
+#include <cstdint>
 
 namespace instructions {
 using namespace mips;

@@ -5,6 +5,26 @@
 //  Created by Jarrod Norwell on 17/10/2026.
 //
 
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/config.h"
+#include "avocado/system.h"
+#include "avocado/tools.h"
+#include "avocado/disc/load.h"
+#include "avocado/memory_card/card_formats.h"
+#include "avocado/sound/sound.h"
+#include "avocado/state/state.h"
+#include "avocado/utils/event.h"
+#include "avocado/utils/file.h"
+#include "avocado/utils/gpu_draw_list.h"
+#include "avocado/utils/psf.h"
+
+#else
+
 #include "config.h"
 #include "system.h"
 #include "tools.h"
@@ -16,6 +36,24 @@
 #include "utils/file.h"
 #include "utils/gpu_draw_list.h"
 #include "utils/psf.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "config.h"
+#include "system.h"
+#include "tools.h"
+#include "disc/load.h"
+#include "memory_card/card_formats.h"
+#include "sound/sound.h"
+#include "state/state.h"
+#include "utils/event.h"
+#include "utils/file.h"
+#include "utils/gpu_draw_list.h"
+#include "utils/psf.h"
+
+#endif // __APPLE__
 
 #include <fmt/core.h>
 #include <fmt/format.h>

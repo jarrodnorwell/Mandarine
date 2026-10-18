@@ -1,4 +1,23 @@
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/utils/gpu_draw_list.h"
+
+#else
+
 #include "utils/gpu_draw_list.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "utils/gpu_draw_list.h"
+
+#endif // __APPLE__
+
 #include <cstdio>
 
 namespace GpuDrawList {

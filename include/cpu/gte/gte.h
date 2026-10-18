@@ -2,10 +2,35 @@
 #include <cstddef>
 #include <cstdint>
 #include <vector>
+
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/cpu/gte/command.h"
+#include "avocado/cpu/gte/math.h"
+#include "avocado/device/device.h"
+#include "avocado/utils/logic.h"
+
+#else
+
 #include "cpu/gte/command.h"
-#include "device/device.h"
 #include "cpu/gte/math.h"
+#include "device/device.h"
 #include "utils/logic.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "cpu/gte/command.h"
+#include "cpu/gte/math.h"
+#include "device/device.h"
+#include "utils/logic.h"
+
+#endif // __APPLE__
 
 namespace gui::debug
 {
@@ -183,7 +208,7 @@ public:
 
     uint32_t read(uint8_t n);
     void write(uint8_t n, uint32_t d);
-    void command(gte::Command &cmd);
+    void command(gte::command &cmd);
 
     template <class Archive>
     void serialize(Archive &ar)

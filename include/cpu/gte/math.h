@@ -1,6 +1,8 @@
 #pragma once
+
 #include <array>
 #include <cstdint>
+
 namespace gte {
 using Matrix = std::array<std::array<int16_t, 3>, 3>;
 

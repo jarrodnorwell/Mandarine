@@ -1,10 +1,36 @@
 #pragma once
+
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/cpu/cop0.h"
+#include "avocado/cpu/opcode.h"
+#include "avocado/cpu/gte/gte.h"
+#include "avocado/utils/macros.h"
+
+#else
+
+#include "cpu/cop0.h"
+#include "cpu/opcode.h"
+#include "cpu/gte/gte.h"
+#include "utils/macros.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "cpu/cop0.h"
+#include "cpu/opcode.h"
+#include "cpu/gte/gte.h"
+#include "utils/macros.h"
+
+#endif // __APPLE__
+
 #include <cstdint>
 #include <unordered_map>
-#include "cpu/cop0.h"
-#include "cpu/gte/gte.h"
-#include "cpu/opcode.h"
-#include "utils/macros.h"
 
 struct System;
 

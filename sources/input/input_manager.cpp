@@ -1,4 +1,22 @@
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/input/input_manager.h"
+
+#else
+
 #include "input/input_manager.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "input/input_manager.h"
+
+#endif // __APPLE__
 
 InputManager* InputManager::_instance = nullptr;
 

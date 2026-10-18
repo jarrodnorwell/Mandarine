@@ -1,6 +1,25 @@
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/disc/format/ecm.h"
+
+#else
+
 #include "disc/format/ecm.h"
-#include <utility>
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "disc/format/ecm.h"
+
+#endif // __APPLE__
+
 #include <array>
+#include <utility>
 
 namespace disc::format {
 Ecm::Ecm(std::string file, std::vector<uint8_t> data) : file(std::move(file)), data(std::move(data)) {}

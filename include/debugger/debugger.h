@@ -1,6 +1,26 @@
 #pragma once
-#include <string>
+
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/cpu/opcode.h"
+
+#else
+
 #include "cpu/opcode.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "cpu/opcode.h"
+
+#endif // __APPLE__
+
+#include <string>
 
 namespace debugger {
 struct Instruction {

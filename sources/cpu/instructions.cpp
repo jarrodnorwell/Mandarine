@@ -1,6 +1,28 @@
-#include "cpu/instructions.h"
-#include <cstdio>
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/system.h"
+#include "avocado/cpu/instructions.h"
+
+#else
+
 #include "system.h"
+#include "cpu/instructions.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "system.h"
+#include "cpu/instructions.h"
+
+#endif // __APPLE__
+
+#include <bit>
+#include <cstdio>
 
 using namespace mips;
 
@@ -590,7 +612,7 @@ void op_cop0(CPU *cpu, Opcode i) {
 
 // Coprocessor two
 void op_cop2(CPU *cpu, Opcode i) {
-    gte::Command command(i.opcode);
+    gte::command command = std::bit_cast<gte::command>(i.opcode);
     if (i.opcode & (1 << 25)) {
         cpu->gte.command(command);
         return;

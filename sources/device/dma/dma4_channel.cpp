@@ -1,5 +1,25 @@
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/device/dma/dma4_channel.h"
+#include "avocado/device/spu/spu.h"
+
+#else
+
 #include "device/dma/dma4_channel.h"
 #include "device/spu/spu.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "device/dma/dma4_channel.h"
+#include "device/spu/spu.h"
+
+#endif // __APPLE__
 
 namespace device::dma {
 DMA4Channel::DMA4Channel(Channel channel, System *sys, spu::SPU *spu) : DMAChannel(channel, sys), spu(spu) {}

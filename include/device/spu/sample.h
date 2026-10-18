@@ -1,6 +1,26 @@
 #pragma once
-#include <cstdint>
+
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/utils/math.h"
+
+#else
+
 #include "utils/math.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "utils/math.h"
+
+#endif // __APPLE__
+
+#include <cstdint>
 
 // Basically an overflow safe int16_t
 struct Sample {

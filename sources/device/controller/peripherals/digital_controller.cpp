@@ -1,9 +1,32 @@
-#include "device/controller/peripherals/digital_controller.h"
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/config.h"
+#include "avocado/device/controller/peripherals/digital_controller.h"
+#include "avocado/input/input_manager.h"
+
+#else
+
+#include "config.h"
+#include "device/controller/peripherals/analog_controller.h"
+#include "input/input_manager.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "config.h"
+#include "device/controller/peripherals/analog_controller.h"
+#include "input/input_manager.h"
+
+#endif // __APPLE__
+
 #include <fmt/core.h>
 #include <fmt/format.h>
 #include <fmt/format-inl.h>
-#include "config.h"
-#include "input/input_manager.h"
 
 namespace peripherals {
 void DigitalController::ButtonState::setByName(const std::string& name, bool value) {

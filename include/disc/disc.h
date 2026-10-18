@@ -1,9 +1,31 @@
 #pragma once
+
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/disc/position.h"
+#include "avocado/disc/subchannel_q.h"
+
+#else
+
+#include "disc/position.h"
+#include "disc/subchannel_q.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "disc/position.h"
+#include "disc/subchannel_q.h"
+
+#endif // __APPLE__
+
 #include <cstdint>
 #include <unordered_map>
 #include <vector>
-#include "disc/position.h"
-#include "disc/subchannel_q.h"
 
 namespace disc {
 enum class TrackType { DATA, AUDIO, INVALID };

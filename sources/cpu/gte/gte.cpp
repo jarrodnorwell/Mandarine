@@ -1,6 +1,30 @@
-#include "cpu/gte/gte.h"
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/config.h"
+#include "avocado/cpu/gte/gte.h"
+#include "avocado/utils/event.h"
+
+#else
+
 #include "config.h"
+#include "cpu/gte/gte.h"
 #include "utils/event.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "config.h"
+#include "cpu/gte/gte.h"
+#include "utils/event.h"
+
+#endif // __APPLE__
+
+#include <bit>
 
 GTE::GTE() : unrTable(generateUnrTable())
 {
@@ -424,18 +448,18 @@ void GTE::write(uint8_t n, uint32_t d)
     }
 }
 
-void GTE::command(gte::Command &cmd)
+void GTE::command(gte::command &cmd)
 {
     if (logging)
     {
-        log.push_back({GTE_ENTRY::MODE::func, cmd.cmd, 0});
+        log.push_back({GTE_ENTRY::MODE::func, cmd.real_gte_command_number, 0});
     }
 
     flag.reg = 0;
     this->sf = cmd.sf;
     this->lm = cmd.lm;
 
-    switch (cmd.cmd)
+    switch (cmd.real_gte_command_number)
     {
     case 0x01:
         rtps();
@@ -453,7 +477,7 @@ void GTE::command(gte::Command &cmd)
         intpl();
         break;
     case 0x12:
-        mvmva(cmd.mvmvaMultiplyMatrix, cmd.mvmvaMultiplyVector, cmd.mvmvaTranslationVector);
+        mvmva(std::bit_cast<int>(cmd.mvmva_multiply_matrix), std::bit_cast<int>(cmd.mvmva_multiply_vector), std::bit_cast<int>(cmd.mvmva_translation_vector));
         break;
     case 0x13:
         ncds();

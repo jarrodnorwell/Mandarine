@@ -1,13 +1,39 @@
 #pragma once
+
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/disc/disc.h"
+#include "avocado/disc/position.h"
+#include "avocado/disc/track.h"
+#include "avocado/utils/file.h"
+
+#else
+
+#include "disc/disc.h"
+#include "disc/position.h"
+#include "disc/track.h"
+#include "utils/file.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "disc/disc.h"
+#include "disc/position.h"
+#include "disc/track.h"
+#include "utils/file.h"
+
+#endif // __APPLE__
+
 #include <cstdio>
 #include <memory>
 #include <optional>
 #include <unordered_map>
 #include <vector>
-#include "disc/disc.h"
-#include "disc/position.h"
-#include "disc/track.h"
-#include "utils/file.h"
 
 namespace disc::format {
 struct Ecm : public Disc {

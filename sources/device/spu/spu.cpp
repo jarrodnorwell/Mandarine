@@ -1,19 +1,57 @@
-#include "device/spu/spu.h"
-#include <fmt/core.h>
-#include <fmt/format.h>
-#include <fmt/format-inl.h>
-#include <array>
-#include <functional>
-#include <vector>
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/config.h"
+#include "avocado/system.h"
+#include "avocado/device/cdrom/cdrom.h"
+#include "avocado/device/spu/interpolation.h"
+#include "avocado/device/spu/reverb.h"
+#include "avocado/device/spu/sample.h"
+#include "avocado/device/spu/spu.h"
+#include "avocado/sound/adpcm.h"
+#include "avocado/utils/file.h"
+#include "avocado/utils/math.h"
+
+#else
+
+#include "config.h"
+#include "system.h"
 #include "device/cdrom/cdrom.h"
 #include "device/spu/interpolation.h"
 #include "device/spu/reverb.h"
 #include "device/spu/sample.h"
+#include "device/spu/spu.h"
 #include "sound/adpcm.h"
-#include "system.h"
 #include "utils/file.h"
 #include "utils/math.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
 #include "config.h"
+#include "system.h"
+#include "device/cdrom/cdrom.h"
+#include "device/spu/interpolation.h"
+#include "device/spu/reverb.h"
+#include "device/spu/sample.h"
+#include "device/spu/spu.h"
+#include "sound/adpcm.h"
+#include "utils/file.h"
+#include "utils/math.h"
+
+#endif // __APPLE__
+
+#include <fmt/core.h>
+#include <fmt/format.h>
+#include <fmt/format-inl.h>
+
+#include <array>
+#include <functional>
+#include <vector>
 
 using namespace spu;
 

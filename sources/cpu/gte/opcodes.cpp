@@ -1,4 +1,22 @@
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/cpu/gte/gte.h"
+
+#else
+
 #include "cpu/gte/gte.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "cpu/gte/gte.h"
+
+#endif // __APPLE__
 
 using gte::Matrix;
 using gte::toVector;

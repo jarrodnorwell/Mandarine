@@ -1,4 +1,23 @@
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/sound/wave.h"
+
+#else
+
 #include "sound/wave.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "sound/wave.h"
+
+#endif // __APPLE__
+
 #include <cstring>
 #include <cstdio> // for FILE, fwrite, fclose
 

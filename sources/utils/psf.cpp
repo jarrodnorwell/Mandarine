@@ -1,10 +1,34 @@
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/utils/file.h"
+#include "avocado/utils/psf.h"
+#include "avocado/utils/psx_exe.h"
+
+#else
+
+#include "utils/file.h"
 #include "utils/psf.h"
+#include "utils/psx_exe.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "utils/file.h"
+#include "utils/psf.h"
+#include "utils/psx_exe.h"
+
+#endif // __APPLE__
+
 #include <fmt/core.h>
+#include <miniz.h>
+
 #include <cstring>
 #include <sstream>
-#include <miniz.h>
-#include "utils/file.h"
-#include "utils/psx_exe.h"
 
 namespace {
 uint32_t read_u32(const std::vector<uint8_t>& vec, size_t offset) {

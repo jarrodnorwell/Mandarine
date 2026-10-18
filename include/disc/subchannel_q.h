@@ -1,7 +1,29 @@
 #pragma once
-#include <cstdint>
+
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/disc/position.h"
+#include "avocado/utils/bcd.h"
+
+#else
+
 #include "disc/position.h"
 #include "utils/bcd.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "disc/position.h"
+#include "utils/bcd.h"
+
+#endif // __APPLE__
+
+#include <cstdint>
 
 namespace disc {
 struct SubchannelQ {

@@ -1,4 +1,22 @@
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/utils/string.h"
+
+#else
+
 #include "utils/string.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "utils/string.h"
+
+#endif // __APPLE__
 
 #include <cstdarg>
 #include <cstdlib>

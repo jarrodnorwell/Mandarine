@@ -1,4 +1,22 @@
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/cpu/cop0.h"
+
+#else
+
 #include "cpu/cop0.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "cpu/cop0.h"
+
+#endif // __APPLE__
 
 std::pair<uint32_t, bool> COP0::read(int reg) {
     uint32_t value = 0;

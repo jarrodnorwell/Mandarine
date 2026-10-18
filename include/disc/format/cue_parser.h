@@ -1,9 +1,31 @@
 #pragma once
+
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/disc/format/cue.h"
+#include "avocado/disc/track.h"
+
+#else
+
+#include "disc/format/cue.h"
+#include "disc/track.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "disc/format/cue.h"
+#include "disc/track.h"
+
+#endif // __APPLE__
+
 #include <memory>
 #include <optional>
 #include <regex>
-#include "disc/format/cue.h"
-#include "disc/track.h"
 
 namespace disc {
     namespace format{

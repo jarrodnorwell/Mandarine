@@ -1,6 +1,27 @@
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/sound/adpcm.h"
+#include "avocado/sound/tables.h"
+
+#else
+
 #include "sound/adpcm.h"
-#include <cassert>
 #include "sound/tables.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "sound/adpcm.h"
+#include "sound/tables.h"
+
+#endif // __APPLE__
+
+#include <cassert>
 
 namespace ADPCM {
 int filterTablePos[5] = {0, 60, 115, 98, 122};

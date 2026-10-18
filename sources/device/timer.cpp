@@ -1,6 +1,27 @@
-#include "device/timer.h"
-#include <fmt/core.h>
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/system.h"
+#include "avocado/device/timer.h"
+
+#else
+
 #include "system.h"
+#include "device/timer.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "system.h"
+#include "device/timer.h"
+
+#endif // __APPLE__
+
+#include <fmt/core.h>
 
 namespace device::timer {
 

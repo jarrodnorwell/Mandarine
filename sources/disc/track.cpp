@@ -5,6 +5,24 @@
 //  Created by Jarrod Norwell on 19/6/2026.
 //
 
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/disc/track.h"
+
+#else
+
 #include "disc/track.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "disc/track.h"
+
+#endif // __APPLE__
 
 namespace disc {}

@@ -1,4 +1,22 @@
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/device/gpu/render/dither.h"
+
+#else
+
 #include "device/gpu/render/dither.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "device/gpu/render/dither.h"
+
+#endif // __APPLE__
 
 namespace {
 constexpr int8_t ditherTable[4][4] = {

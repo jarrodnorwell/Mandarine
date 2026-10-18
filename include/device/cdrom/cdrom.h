@@ -1,9 +1,31 @@
 #pragma once
+
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/device/cdrom/fifo.h"
+#include "avocado/disc/disc.h"
+
+#else
+
+#include "device/cdrom/fifo.h"
+#include "disc/disc.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "device/cdrom/fifo.h"
+#include "disc/disc.h"
+
+#endif // __APPLE__
+
 #include <cassert>
 #include <deque>
 #include <memory>
-#include "disc/disc.h"
-#include "device/cdrom/fifo.h"
 
 struct System;
 

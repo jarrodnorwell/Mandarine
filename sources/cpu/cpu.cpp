@@ -1,7 +1,31 @@
-#include "cpu/cpu.h"
-#include "bios/functions.h"
-#include "cpu/instructions.h"
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/system.h"
+#include "avocado/bios/functions.h"
+#include "avocado/cpu/cpu.h"
+#include "avocado/cpu/instructions.h"
+
+#else
+
 #include "system.h"
+#include "bios/functions.h"
+#include "cpu/cpu.h"
+#include "cpu/instructions.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "system.h"
+#include "bios/functions.h"
+#include "cpu/cpu.h"
+#include "cpu/instructions.h"
+
+#endif // __APPLE__
 
 namespace mips {
 CPU::CPU(System* sys) : sys(sys) {

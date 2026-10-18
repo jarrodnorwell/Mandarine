@@ -1,5 +1,24 @@
 #pragma once
+
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/device/device.h"
+
+#else
+
 #include "device/device.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "device/device.h"
+
+#endif // __APPLE__
 
 namespace spu {
 union Volume {

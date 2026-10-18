@@ -1,9 +1,30 @@
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/disc/format/cue_parser.h"
+#include "avocado/utils/file.h"
+
+#else
+
 #include "disc/format/cue_parser.h"
+#include "utils/file.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "disc/format/cue_parser.h"
+#include "utils/file.h"
+
+#endif // __APPLE__
+
 #include <fmt/core.h>
 #include <fmt/format.h>
 #include <fmt/format-inl.h>
 #include <sstream>
-#include "utils/file.h"
 
 namespace disc {
 namespace format {

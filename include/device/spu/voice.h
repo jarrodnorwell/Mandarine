@@ -1,8 +1,33 @@
 #pragma once
-#include <vector>
-#include "device/spu/adsr.h"
+
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/device/device.h"
+#include "avocado/device/spu/adsr.h"
+#include "avocado/device/spu/regs.h"
+
+#else
+
 #include "device/device.h"
+#include "device/spu/adsr.h"
 #include "device/spu/regs.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "device/device.h"
+#include "device/spu/adsr.h"
+#include "device/spu/regs.h"
+
+#endif // __APPLE__
+
+#include <vector>
+
 
 namespace spu {
 struct Voice {

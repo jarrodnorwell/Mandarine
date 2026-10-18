@@ -1,10 +1,36 @@
 #pragma once
-#include <array>
-#include <vector>
+
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/device/gpu/color_depth.h"
+#include "avocado/device/gpu/primitive.h"
+#include "avocado/device/gpu/psx_color.h"
+#include "avocado/device/gpu/registers.h"
+
+#else
+
 #include "device/gpu/color_depth.h"
 #include "device/gpu/primitive.h"
 #include "device/gpu/psx_color.h"
 #include "device/gpu/registers.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "device/gpu/color_depth.h"
+#include "device/gpu/primitive.h"
+#include "device/gpu/psx_color.h"
+#include "device/gpu/registers.h"
+
+#endif // __APPLE__
+
+#include <array>
+#include <vector>
 
 #define VRAM ((uint16_t (*)[VRAM_WIDTH])vram.data())
 

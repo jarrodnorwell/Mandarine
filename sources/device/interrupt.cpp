@@ -1,5 +1,25 @@
-#include "device/interrupt.h"
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/system.h"
+#include "avocado/device/interrupt.h"
+
+#else
+
 #include "system.h"
+#include "device/interrupt.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "system.h"
+#include "device/interrupt.h"
+
+#endif // __APPLE__
 
 using namespace interrupt;
 

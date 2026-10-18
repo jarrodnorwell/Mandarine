@@ -1,8 +1,32 @@
-#include "device/dma/dma_channel.h"
-#include <fmt/core.h>
-#include <magic_enum/magic_enum.hpp>
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/config.h"
+#include "avocado/system.h"
+#include "avocado/device/dma/dma_channel.h"
+
+#else
+
 #include "config.h"
 #include "system.h"
+#include "device/dma/dma_channel.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "config.h"
+#include "system.h"
+#include "device/dma/dma_channel.h"
+
+#endif // __APPLE__
+
+#include <fmt/core.h>
+#include <magic_enum/magic_enum.hpp>
+
 #include <unordered_set>
 
 namespace device::dma {

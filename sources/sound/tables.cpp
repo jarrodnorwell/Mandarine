@@ -1,4 +1,22 @@
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/sound/tables.h"
+
+#else
+
 #include "sound/tables.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "sound/tables.h"
+
+#endif // __APPLE__
 
 namespace ADPCM {
 int16_t zigzagTables[7][29] = {

@@ -1,8 +1,28 @@
 #pragma once
-#include <array>
-#include <vector>
-#include <optional>
+
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/device/device.h"
+
+#else
+
 #include "device/device.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "device/device.h"
+
+#endif // __APPLE__
+
+#include <array>
+#include <optional>
+#include <vector>
 
 namespace mdec {
 using decodedBlock = std::array<uint32_t, 16 * 16>;

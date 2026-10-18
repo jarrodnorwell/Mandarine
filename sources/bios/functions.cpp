@@ -1,8 +1,34 @@
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/system.h"
+#include "avocado/bios/functions.h"
+#include "avocado/debugger/debugger.h"
+#include "avocado/utils/event.h"
+#include "avocado/utils/string.h"
+
+#else
+
 #include "system.h"
 #include "bios/functions.h"
 #include "debugger/debugger.h"
 #include "utils/event.h"
 #include "utils/string.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "system.h"
+#include "bios/functions.h"
+#include "debugger/debugger.h"
+#include "utils/event.h"
+#include "utils/string.h"
+
+#endif // __APPLE__
 
 #include <ranges>
 #include <string_view>

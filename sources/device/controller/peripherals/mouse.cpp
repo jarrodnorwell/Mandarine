@@ -1,10 +1,35 @@
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/config.h"
+#include "avocado/device/controller/peripherals/mouse.h"
+#include "avocado/input/input_manager.h"
+#include "avocado/utils/math.h"
+
+#else
+
+#include "config.h"
 #include "device/controller/peripherals/mouse.h"
+#include "input/input_manager.h"
+#include "utils/math.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "config.h"
+#include "device/controller/peripherals/mouse.h"
+#include "input/input_manager.h"
+#include "utils/math.h"
+
+#endif // __APPLE__
+
 #include <fmt/core.h>
 #include <fmt/format.h>
 #include <fmt/format-inl.h>
-#include "config.h"
-#include "input/input_manager.h"
-#include "utils/math.h"
 
 namespace peripherals {
 Mouse::Mouse(int port) : AbstractDevice(Type::Mouse, port), path(fmt::format("controller/{}/", port)) {}

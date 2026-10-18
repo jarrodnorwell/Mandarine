@@ -1,7 +1,29 @@
-#include <algorithm>
-#include <fmt/core.h>
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/device/cdrom/cdrom.h"
+#include "avocado/utils/bcd.h"
+
+#else
+
 #include "device/cdrom/cdrom.h"
 #include "utils/bcd.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "device/cdrom/cdrom.h"
+#include "utils/bcd.h"
+
+#endif // __APPLE__
+
+#include <algorithm>
+
+#include <fmt/core.h>
 
 namespace device {
 namespace cdrom {

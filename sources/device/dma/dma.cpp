@@ -1,5 +1,23 @@
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/system.h"
+#include "avocado/device/dma/dma.h"
+#include "avocado/device/dma/dma0_channel.h"
+#include "avocado/device/dma/dma1_channel.h"
+#include "avocado/device/dma/dma2_channel.h"
+#include "avocado/device/dma/dma3_channel.h"
+#include "avocado/device/dma/dma4_channel.h"
+#include "avocado/device/dma/dma5_channel.h"
+#include "avocado/device/dma/dma6_channel.h"
+
+#else
+
+#include "system.h"
 #include "device/dma/dma.h"
-#include <fmt/core.h>
 #include "device/dma/dma0_channel.h"
 #include "device/dma/dma1_channel.h"
 #include "device/dma/dma2_channel.h"
@@ -7,7 +25,24 @@
 #include "device/dma/dma4_channel.h"
 #include "device/dma/dma5_channel.h"
 #include "device/dma/dma6_channel.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
 #include "system.h"
+#include "device/dma/dma.h"
+#include "device/dma/dma0_channel.h"
+#include "device/dma/dma1_channel.h"
+#include "device/dma/dma2_channel.h"
+#include "device/dma/dma3_channel.h"
+#include "device/dma/dma4_channel.h"
+#include "device/dma/dma5_channel.h"
+#include "device/dma/dma6_channel.h"
+
+#endif // __APPLE__
+
+#include <fmt/core.h>
 
 namespace device::dma {
 DMA::DMA(System* sys) : sys(sys) { reset(); }

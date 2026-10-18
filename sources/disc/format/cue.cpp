@@ -1,4 +1,23 @@
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/disc/format/cue.h"
+
+#else
+
 #include "disc/format/cue.h"
+
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "disc/format/cue.h"
+
+#endif // __APPLE__
+
 #include <fmt/core.h>
 
 namespace disc {

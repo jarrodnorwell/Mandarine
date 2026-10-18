@@ -1,16 +1,50 @@
-#include "device/gpu/gpu.h"
-#include <fmt/core.h>
-#include <cassert>
+#if __APPLE__
+
+#include <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#include "avocado/config.h"
+#include "avocado/system.h"
+#include "avocado/device/gpu/gpu.h"
+#include "avocado/device/gpu/render/render.h"
+#include "avocado/utils/event.h"
+#include "avocado/utils/file.h"
+#include "avocado/utils/logic.h"
+#include "avocado/utils/macros.h"
+#include "avocado/utils/timing.h"
+
+#else
+
 #include "config.h"
-#include "device/gpu/render/render.h"
 #include "system.h"
+#include "device/gpu/gpu.h"
+#include "device/gpu/render/render.h"
+#include "utils/event.h"
 #include "utils/file.h"
 #include "utils/logic.h"
 #include "utils/macros.h"
 #include "utils/timing.h"
-#include "utils/event.h"
 
-// For vram dump
+#endif // TARGET_OS_IPHONE
+
+#else
+
+#include "config.h"
+#include "system.h"
+#include "device/gpu/gpu.h"
+#include "device/gpu/render/render.h"
+#include "utils/event.h"
+#include "utils/file.h"
+#include "utils/logic.h"
+#include "utils/macros.h"
+#include "utils/timing.h"
+
+#endif // __APPLE__
+
+#include <cassert>
+
+#include <fmt/core.h>
 #include <stb_image_write.h>
 
 namespace gpu

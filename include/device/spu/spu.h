@@ -1,8 +1,8 @@
 #pragma once
 
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -19,15 +19,6 @@
 #include "device/spu/voice.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "device/device.h"
-#include "device/spu/noise.h"
-#include "device/spu/regs.h"
-#include "device/spu/voice.h"
-
-#endif // __APPLE__
 
 #include <array>
 

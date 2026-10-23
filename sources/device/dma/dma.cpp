@@ -1,6 +1,6 @@
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -27,20 +27,6 @@
 #include "device/dma/dma6_channel.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "system.h"
-#include "device/dma/dma.h"
-#include "device/dma/dma0_channel.h"
-#include "device/dma/dma1_channel.h"
-#include "device/dma/dma2_channel.h"
-#include "device/dma/dma3_channel.h"
-#include "device/dma/dma4_channel.h"
-#include "device/dma/dma5_channel.h"
-#include "device/dma/dma6_channel.h"
-
-#endif // __APPLE__
 
 #include <fmt/core.h>
 

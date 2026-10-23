@@ -1,6 +1,6 @@
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -11,12 +11,6 @@
 #include "cpu/gte/gte.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "cpu/gte/gte.h"
-
-#endif // __APPLE__
 
 using gte::Matrix;
 using gte::toVector;

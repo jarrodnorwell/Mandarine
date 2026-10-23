@@ -1,6 +1,6 @@
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -13,13 +13,6 @@
 #include "sound/tables.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "sound/adpcm.h"
-#include "sound/tables.h"
-
-#endif // __APPLE__
 
 #include <cassert>
 

@@ -1,8 +1,8 @@
 #pragma once
 
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -17,14 +17,6 @@
 #include "utils/event.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "device/controller/controller_type.h"
-#include "device/gpu/rendering_mode.h"
-#include "utils/event.h"
-
-#endif // __APPLE__
 
 #include <string>
 #include <unordered_map>

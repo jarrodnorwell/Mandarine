@@ -1,6 +1,6 @@
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -19,16 +19,6 @@
 #include "utils/file.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "config.h"
-#include "system.h"
-#include "state/state.h"
-#include "disc/load.h"
-#include "utils/file.h"
-
-#endif // __APPLE__
 
 #include <cereal/archives/binary.hpp>
 #include <cereal/types/array.hpp>

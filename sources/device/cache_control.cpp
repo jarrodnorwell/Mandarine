@@ -1,6 +1,6 @@
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -13,13 +13,6 @@
 #include "device/cache_control.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "system.h"
-#include "device/cache_control.h"
-
-#endif // __APPLE__
 
 CacheControl::CacheControl(System* sys) : sys(sys) { reset(); }
 

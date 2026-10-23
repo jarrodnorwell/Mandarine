@@ -8,8 +8,8 @@
 #pragma once
 
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -20,12 +20,6 @@
 #include "device/spu/spu.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "device/spu/spu.h"
-
-#endif // __APPLE__
 
 #include <cstdint>
 #include <deque>

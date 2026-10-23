@@ -1,6 +1,6 @@
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -13,13 +13,6 @@
 #include "cpu/instructions.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "system.h"
-#include "cpu/instructions.h"
-
-#endif // __APPLE__
 
 #include <bit>
 #include <cstdio>

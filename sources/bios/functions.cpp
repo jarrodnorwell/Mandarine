@@ -1,6 +1,6 @@
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -19,16 +19,6 @@
 #include "utils/string.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "system.h"
-#include "bios/functions.h"
-#include "debugger/debugger.h"
-#include "utils/event.h"
-#include "utils/string.h"
-
-#endif // __APPLE__
 
 #include <ranges>
 #include <string_view>

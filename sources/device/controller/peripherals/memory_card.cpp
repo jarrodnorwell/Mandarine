@@ -1,6 +1,6 @@
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -15,14 +15,6 @@
 #include "utils/event.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "config.h"
-#include "device/controller/peripherals/memory_card.h"
-#include "utils/event.h"
-
-#endif // __APPLE__
 
 #include <fmt/core.h>
 

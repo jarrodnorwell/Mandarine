@@ -1,6 +1,6 @@
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -27,20 +27,6 @@
 #include "utils/timing.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "config.h"
-#include "system.h"
-#include "device/gpu/gpu.h"
-#include "device/gpu/render/render.h"
-#include "utils/event.h"
-#include "utils/file.h"
-#include "utils/logic.h"
-#include "utils/macros.h"
-#include "utils/timing.h"
-
-#endif // __APPLE__
 
 #include <cassert>
 

@@ -6,8 +6,8 @@
 //
 
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -38,22 +38,6 @@
 #include "utils/psf.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "config.h"
-#include "system.h"
-#include "tools.h"
-#include "disc/load.h"
-#include "memory_card/card_formats.h"
-#include "sound/sound.h"
-#include "state/state.h"
-#include "utils/event.h"
-#include "utils/file.h"
-#include "utils/gpu_draw_list.h"
-#include "utils/psf.h"
-
-#endif // __APPLE__
 
 #include <fmt/core.h>
 #include <fmt/format.h>

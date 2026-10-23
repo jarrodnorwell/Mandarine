@@ -1,8 +1,8 @@
 #pragma once
 
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -19,15 +19,6 @@
 #include "utils/macros.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "device/gpu/color_depth.h"
-#include "device/gpu/gpu.h"
-#include "device/gpu/primitive.h"
-#include "utils/macros.h"
-
-#endif // __APPLE__
 
 #define gpuVRAM ((uint16_t(*)[gpu::VRAM_WIDTH])gpu->vram.data())
 

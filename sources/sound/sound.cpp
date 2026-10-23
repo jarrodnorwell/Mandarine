@@ -6,8 +6,8 @@
 //
 
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -16,17 +16,10 @@
 
 #else
 
-#include "avocado/constants.h"
-#include "sound/sound.h"
-
-#endif // TARGET_OS_IPHONE
-
-#else
-
 #include "constants.h"
 #include "sound/sound.h"
 
-#endif // __APPLE__
+#endif // TARGET_OS_IPHONE
 
 namespace sound {
     std::deque<uint16_t> buffer;

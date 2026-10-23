@@ -1,6 +1,6 @@
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -11,12 +11,6 @@
 #include "device/serial.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "device/serial.h"
-
-#endif // __APPLE__
 
 #include <fmt/core.h>
 

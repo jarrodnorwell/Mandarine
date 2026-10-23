@@ -1,6 +1,6 @@
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -13,13 +13,6 @@
 #include "utils/bcd.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "device/cdrom/cdrom.h"
-#include "utils/bcd.h"
-
-#endif // __APPLE__
 
 #include <algorithm>
 

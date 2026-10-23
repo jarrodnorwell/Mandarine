@@ -1,6 +1,6 @@
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -13,13 +13,6 @@
 #include "device/gpu/gpu.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "device/dma/dma2_channel.h"
-#include "device/gpu/gpu.h"
-
-#endif // __APPLE__
 
 namespace device::dma {
 DMA2Channel::DMA2Channel(Channel channel, System *sys, gpu::GPU *gpu) : DMAChannel(channel, sys), gpu(gpu) {}

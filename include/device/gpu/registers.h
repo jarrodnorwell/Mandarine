@@ -1,8 +1,8 @@
 #pragma once
 
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -15,13 +15,6 @@
 #include "device/gpu/semi_transparency.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "device/device.h"
-#include "device/gpu/semi_transparency.h"
-
-#endif // __APPLE__
 
 #include <vector>
 

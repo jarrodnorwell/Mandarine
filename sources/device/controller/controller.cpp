@@ -1,6 +1,6 @@
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -25,19 +25,6 @@
 #include "utils/event.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "config.h"
-#include "system.h"
-#include "device/controller/controller.h"
-#include "device/controller/peripherals/analog_controller.h"
-#include "device/controller/peripherals/digital_controller.h"
-#include "device/controller/peripherals/mouse.h"
-#include "device/controller/peripherals/none.h"
-#include "utils/event.h"
-
-#endif // __APPLE__
 
 namespace device
 {

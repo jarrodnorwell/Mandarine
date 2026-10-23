@@ -1,8 +1,8 @@
 #pragma once
 
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -15,13 +15,6 @@
 #include "disc/track.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "disc/format/cue.h"
-#include "disc/track.h"
-
-#endif // __APPLE__
 
 #include <memory>
 #include <optional>

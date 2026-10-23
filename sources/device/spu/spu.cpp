@@ -1,6 +1,6 @@
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -29,21 +29,6 @@
 #include "utils/math.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "config.h"
-#include "system.h"
-#include "device/cdrom/cdrom.h"
-#include "device/spu/interpolation.h"
-#include "device/spu/reverb.h"
-#include "device/spu/sample.h"
-#include "device/spu/spu.h"
-#include "sound/adpcm.h"
-#include "utils/file.h"
-#include "utils/math.h"
-
-#endif // __APPLE__
 
 #include <fmt/core.h>
 #include <fmt/format.h>

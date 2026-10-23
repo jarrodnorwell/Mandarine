@@ -1,6 +1,6 @@
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -11,12 +11,6 @@
 #include "utils/vector.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "utils/vector.h"
-
-#endif // __APPLE__
 
 #include <cmath>
 

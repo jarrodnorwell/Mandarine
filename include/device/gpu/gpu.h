@@ -1,8 +1,8 @@
 #pragma once
 
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -19,15 +19,6 @@
 #include "device/gpu/registers.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "device/gpu/color_depth.h"
-#include "device/gpu/primitive.h"
-#include "device/gpu/psx_color.h"
-#include "device/gpu/registers.h"
-
-#endif // __APPLE__
 
 #include <array>
 #include <vector>

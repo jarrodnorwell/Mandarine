@@ -1,11 +1,8 @@
 #pragma once
-#include <cstddef>
-#include <cstdint>
-#include <vector>
 
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -23,14 +20,9 @@
 
 #endif // TARGET_OS_IPHONE
 
-#else
-
-#include "cpu/gte/command.h"
-#include "cpu/gte/math.h"
-#include "device/device.h"
-#include "utils/logic.h"
-
-#endif // __APPLE__
+#include <cstddef>
+#include <cstdint>
+#include <vector>
 
 namespace gui::debug
 {

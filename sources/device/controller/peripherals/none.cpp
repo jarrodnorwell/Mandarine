@@ -1,6 +1,6 @@
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -11,12 +11,6 @@
 #include "device/controller/peripherals/none.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "device/controller/peripherals/none.h"
-
-#endif // __APPLE__
 
 namespace peripherals {
 None::None(int port) : AbstractDevice(Type::None, port) {}

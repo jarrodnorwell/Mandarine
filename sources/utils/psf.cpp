@@ -1,6 +1,6 @@
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -15,14 +15,6 @@
 #include "utils/psx_exe.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "utils/file.h"
-#include "utils/psf.h"
-#include "utils/psx_exe.h"
-
-#endif // __APPLE__
 
 #include <fmt/core.h>
 #include <miniz.h>

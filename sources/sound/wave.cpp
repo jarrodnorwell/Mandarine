@@ -1,6 +1,6 @@
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -11,12 +11,6 @@
 #include "sound/wave.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "sound/wave.h"
-
-#endif // __APPLE__
 
 #include <cstring>
 #include <cstdio> // for FILE, fwrite, fclose

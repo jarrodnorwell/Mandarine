@@ -1,6 +1,6 @@
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -11,12 +11,6 @@
 #include "device/dma/dma5_channel.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "device/dma/dma5_channel.h"
-
-#endif // __APPLE__
 
 namespace device::dma {
 DMA5Channel::DMA5Channel(Channel channel, System* sys) : DMAChannel(channel, sys) {}

@@ -1,6 +1,6 @@
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -15,14 +15,6 @@
 #include "utils/file.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "disc/track.h"
-#include "disc/format/chd_format.h"
-#include "utils/file.h"
-
-#endif // __APPLE__
 
 #include <fmt/core.h>
 

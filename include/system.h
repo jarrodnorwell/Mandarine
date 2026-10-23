@@ -1,8 +1,8 @@
 #pragma once
 
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -45,28 +45,6 @@
 #include "utils/timing.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "constants.h"
-#include "cpu/cpu.h"
-#include "device/cache_control.h"
-#include "device/expansion2.h"
-#include "device/interrupt.h"
-#include "device/memory_control.h"
-#include "device/serial.h"
-#include "device/timer.h"
-#include "device/cdrom/cdrom.h"
-#include "device/controller/controller.h"
-#include "device/dma/dma.h"
-#include "device/gpu/gpu.h"
-#include "device/mdec/mdec.h"
-#include "device/ram_control.h"
-#include "device/spu/spu.h"
-#include "utils/macros.h"
-#include "utils/timing.h"
-
-#endif // __APPLE__
 
 #include <cstdint>
 #include <cstdlib>

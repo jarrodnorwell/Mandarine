@@ -1,6 +1,6 @@
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -15,14 +15,6 @@
 #include "device/dma/dma_channel.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "config.h"
-#include "system.h"
-#include "device/dma/dma_channel.h"
-
-#endif // __APPLE__
 
 #include <fmt/core.h>
 #include <magic_enum/magic_enum.hpp>

@@ -6,8 +6,8 @@
 //
 
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -18,9 +18,3 @@
 #include "stdafx.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "stdafx.h"
-
-#endif // __APPLE__

@@ -1,8 +1,8 @@
 #pragma once
 
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -17,14 +17,6 @@
 #include "utils/math.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "device/gpu/semi_transparency.h"
-#include "utils/macros.h"
-#include "utils/math.h"
-
-#endif // __APPLE__
 
 #include <cstdint>
 

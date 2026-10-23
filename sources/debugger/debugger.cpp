@@ -1,6 +1,6 @@
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -11,12 +11,6 @@
 #include "debugger/debugger.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "debugger/debugger.h"
-
-#endif // __APPLE__
 
 #include <fmt/core.h>
 #include <fmt/format.h>

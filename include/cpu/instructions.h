@@ -1,8 +1,8 @@
 #pragma once
 
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -15,13 +15,6 @@
 #include "cpu/opcode.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "cpu/cpu.h"
-#include "cpu/opcode.h"
-
-#endif // __APPLE__
 
 #include <array>
 #include <cstdint>

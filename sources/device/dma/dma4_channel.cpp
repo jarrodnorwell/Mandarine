@@ -1,6 +1,6 @@
 #if __APPLE__
-
 #include <TargetConditionals.h>
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -13,13 +13,6 @@
 #include "device/spu/spu.h"
 
 #endif // TARGET_OS_IPHONE
-
-#else
-
-#include "device/dma/dma4_channel.h"
-#include "device/spu/spu.h"
-
-#endif // __APPLE__
 
 namespace device::dma {
 DMA4Channel::DMA4Channel(Channel channel, System *sys, spu::SPU *spu) : DMAChannel(channel, sys), spu(spu) {}

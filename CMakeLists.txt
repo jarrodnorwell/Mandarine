@@ -3,7 +3,14 @@ cmake_minimum_required(VERSION 4.0)
 project(Mandarine LANGUAGES CXX)
 
 if(MSVC)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /D_CRT_SECURE_NO_WARNINGS")
     set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+
+    set(CMAKE_AUTOMOC ON)
+    set(CMAKE_AUTOUIC ON)
+    set(CMAKE_AUTORCC ON)
+
+    find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
 endif()
 
 include(FetchContent)
@@ -17,6 +24,7 @@ set(ENABLE_TEST OFF CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(EventBus)
 
 FetchContent_Declare(FLAC GIT_REPOSITORY https://github.com/xiph/flac GIT_TAG master)
+set(DOXYGEN_WARN_IF_UNDOCUMENTED NO)
 set(INSTALL_MANPAGES OFF CACHE BOOL "" FORCE)
 set(WITH_OGG OFF CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(FLAC)
@@ -65,10 +73,22 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(${CMAKE_PROJECT_NAME} main.cpp)
+add_executable(${CMAKE_PROJECT_NAME} main.cpp mainwindow.cpp mainwindow.ui)
 
 if (MSVC)
     target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE _USE_MATH_DEFINES)
+
+    add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD 
+        COMMAND Qt6::windeployqt --release
+        ARGS $<TARGET_FILE:${CMAKE_PROJECT_NAME}>
+    )
+
+    add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            $<TARGET_RUNTIME_DLLS:${CMAKE_PROJECT_NAME}>
+            $<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>
+        COMMAND_EXPAND_LISTS
+    )
 endif()
 
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
@@ -77,7 +97,7 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/externals/stb
 )
 
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE cereal chdr Dexode::EventBus fmt-header-only magic_enum miniz)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE cereal chdr Dexode::EventBus fmt-header-only magic_enum miniz Qt6::Core Qt6::Gui Qt6::Widgets)
 
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # BIOS

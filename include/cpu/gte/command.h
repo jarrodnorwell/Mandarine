@@ -3,6 +3,7 @@
 #include <cstdint>
 
 namespace gte {
+
     struct command {
         enum mvmva_tv : uint32_t {
             tr = 0,
@@ -41,9 +42,10 @@ namespace gte {
         uint32_t fake_gte_command_number : 5;
         uint32_t cop2 : 7;
     };
+
 }; //namespace gte
 
-
+/*
 namespace gte {
 union Command {
     struct {
@@ -63,3 +65,4 @@ union Command {
     Command(uint32_t v) : _reg(v) {}
 };
 };
+*/

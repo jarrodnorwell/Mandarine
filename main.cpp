@@ -1,10 +1,17 @@
 #include "system.h"
+#include "mainwindow.h"
 
 #include <deque>
 #include <filesystem>
 #include <fstream>
 #include <mutex>
 #include <sstream>
+
+#include <QApplication>
+#include <QDir>
+#include <QStandardPaths>
+#include <QString>
+#include <QDebug>
 
 bool fileExists(const std::string &path)
 {
@@ -73,8 +80,11 @@ size_t getFileSize(const std::string &path)
     return std::filesystem::file_size(path);
 }
 
-int main(int argc, char *argv[])
-{
-    auto system = std::make_unique<System>();
-    return 0;
+int main(int argc, char *argv[]) {
+    QApplication a(argc, argv);
+        
+    MainWindow window;
+    window.show();
+
+    return a.exec();
 }

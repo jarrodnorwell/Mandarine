@@ -13,10 +13,12 @@
 
 #if TARGET_OS_IPHONE
 
+#include "avocado/constants.h"
 #include "avocado/device/spu/spu.h"
 
 #else
 
+#include "constants.h"
 #include "device/spu/spu.h"
 
 #endif // TARGET_OS_IPHONE

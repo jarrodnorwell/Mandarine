@@ -342,7 +342,7 @@ void System::write(uint32_t address, T value) {
     WRITE_IO32(0x1f801810, 0x1f801818, gpu);
     WRITE_IO32(0x1f801820, 0x1f801828, mdec);
 
-    if (in_range<0xfffe0130, 4>(address) and sizeof(T) not_eq sizeof(uint32_t)) {
+    if (in_range<0xfffe0130, 4>(address) and sizeof(T) == sizeof(uint32_t)) {
         cacheControl->write(0, value);
         return;
     }

@@ -38,6 +38,12 @@ FetchContent_MakeAvailable(magic_enum)
 FetchContent_Declare(miniz GIT_REPOSITORY https://github.com/richgel999/miniz GIT_TAG master)
 FetchContent_MakeAvailable(miniz)
 
+FetchContent_Declare(SDL3 GIT_REPOSITORY https://github.com/libsdl-org/sdl GIT_TAG main)
+set(SDL_SHARED ON CACHE BOOL "" FORCE)
+set(SDL_STATIC OFF CACHE BOOL "" FORCE)
+set(SDL_TEST OFF CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(SDL3)
+
 FetchContent_Declare(zlib GIT_REPOSITORY https://github.com/madler/zlib GIT_TAG develop)
 FetchContent_MakeAvailable(zlib)
 
@@ -97,7 +103,7 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/externals/stb
 )
 
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE cereal chdr Dexode::EventBus fmt-header-only magic_enum miniz Qt6::Core Qt6::Gui Qt6::Widgets)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE cereal chdr Dexode::EventBus fmt-header-only magic_enum miniz SDL3::SDL3 Qt6::Core Qt6::Gui Qt6::Widgets)
 
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # BIOS

@@ -170,7 +170,7 @@ void CDROM::handleSector() {
             }
 
             if (this->mode.xaEnabled && !this->mute) {
-                auto frame = ADPCM::decodeXA(rawSector.data() + 24, codinginfo);
+                auto frame = adpcm::decodeXA(rawSector.data() + 24, codinginfo);
 
                 for (auto sample : frame) {
                     audio.push_back(mixSample(sample));

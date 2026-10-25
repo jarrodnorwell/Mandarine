@@ -147,7 +147,7 @@ int main(int argc, char *argv[]) {
         config.bios = "C:\\Users\\Jarrod Norwell\\Documents\\Mandarine\\bios\\SCPH1001.BIN";
 
         auto system = tools::reset();
-        tools::load(system, "C:\\Users\\Jarrod Norwell\\Downloads\\Crash Bandicoot\\Crash Bandicoot.bin");
+        tools::load(system, "E:\\PlayStation 1\\Disney's Atlantis - The Lost Empire\\Disney's Atlantis - The Lost Empire.cue");
         system->state = System::State::run;
 
         sound::init();
@@ -166,6 +166,10 @@ int main(int argc, char *argv[]) {
 
             SDL_RenderClear(renderer);
 
+            SDL_UpdateTexture(texture, nullptr, system->gpu->vram.data(), gpu::VRAM_WIDTH * sizeof(uint16_t));
+            SDL_RenderTexture(renderer, texture, nullptr, nullptr);
+
+            /*
             SDL_FRect frect{
                 system->gpu->displayAreaStartX,
                 system->gpu->displayAreaStartY,
@@ -190,6 +194,7 @@ int main(int argc, char *argv[]) {
                 SDL_UpdateTexture(texture, &rect, system->gpu->vram.data(), gpu::VRAM_WIDTH * sizeof(uint16_t));
                 SDL_RenderTexture(renderer, texture, &frect, &frect);
             }
+            */
 
             SDL_RenderPresent(renderer);
 

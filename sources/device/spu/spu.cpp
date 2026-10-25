@@ -60,7 +60,7 @@ void SPU::step(device::cdrom::CDROM* cdrom) {
 
         if (voice.decodedSamples.empty()) {
             auto block = readBlock(voice.currentAddress._reg * 8);
-            voice.decodedSamples = ADPCM::decode(block.data(), voice.prevSample);
+            voice.decodedSamples = adpcm::decode(block, voice.previous_sample);
             voice.flagsParsed = false;
         }
 

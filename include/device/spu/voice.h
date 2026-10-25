@@ -18,8 +18,8 @@
 
 #endif // TARGET_OS_IPHONE
 
+#include <array>
 #include <vector>
-
 
 namespace spu {
 struct Voice {
@@ -60,7 +60,7 @@ struct Voice {
     uint64_t cycles;  // For dismissing KeyOff write right after KeyOn
 
     // ADPCM decoding
-    int32_t prevSample[2];
+    std::array<int32_t, 2> previous_sample;
     std::vector<int16_t> decodedSamples;
     std::vector<int16_t> prevDecodedSamples;
 
@@ -91,7 +91,7 @@ struct Voice {
         ar(flagsParsed);
         ar(sample);
         ar(cycles);
-        ar(prevSample);
+        ar(previous_sample);
         ar(decodedSamples);
         ar(prevDecodedSamples);
     }

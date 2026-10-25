@@ -440,7 +440,7 @@ void GTE::write(uint8_t n, uint32_t d)
     }
 }
 
-void GTE::command(gte::command &cmd)
+void GTE::command(gte::Command &cmd)
 {
     if (logging)
     {
@@ -448,7 +448,7 @@ void GTE::command(gte::command &cmd)
     }
 
     flag.reg = 0;
-    this->sf = cmd.sf;
+    this->sf = cmd.ShiftFraction();
     this->lm = cmd.lm;
 
     switch (cmd.real_gte_command_number)

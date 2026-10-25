@@ -17,6 +17,7 @@
 #endif // TARGET_OS_IPHONE
 
 #include <algorithm>
+#include <bit>
 #include <cmath>
 
 namespace spu {
@@ -38,7 +39,7 @@ Voice::Voice() {
     adsrWaitCycles = 0;
     loadRepeatAddress = false;
 
-    prevSample[0] = prevSample[1] = 0;
+    previous_sample.at(0) = previous_sample.at(1) = 0x00;
 
     enabled = true;
 }
@@ -104,18 +105,19 @@ void Voice::processEnvelope() {
 void Voice::parseFlags(uint8_t flags) {
     flagsParsed = true;
 
+    adpcm::flag flag = std::bit_cast<adpcm::flag>(flags);
+
     // Mark beginning of the loop
-    if (flags & ADPCM::Flag::LoopStart) {
+    if (flag.LoopStart())
         repeatAddress = currentAddress;
-    }
 
     // Jump to Repeat address AFTER playing current sample
-    if (flags & ADPCM::Flag::LoopEnd) {
+    if (flag.LoopEnd()) {
         loopEnd = true;
         loadRepeatAddress = true;
 
         // if Repeat == 0 - force Release
-        if (!(flags & ADPCM::Flag::Repeat) && mode != Mode::Noise) {
+        if (!flag.LoopRepeat() && mode != Mode::Noise) {
             adsrVolume._reg = 0;
             keyOff();
         }
@@ -141,7 +143,7 @@ void Voice::keyOn(uint64_t cycles) {
     loadRepeatAddress = false;
     adsrWaitCycles = 0;
 
-    prevSample[0] = prevSample[1] = 0;
+    previous_sample.at(0) = previous_sample.at(1) = 0x00;
     prevDecodedSamples.clear();
 
     this->cycles = cycles;

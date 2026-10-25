@@ -200,7 +200,7 @@ public:
 
     uint32_t read(uint8_t n);
     void write(uint8_t n, uint32_t d);
-    void command(gte::command &cmd);
+    void command(gte::Command &cmd);
 
     template <class Archive>
     void serialize(Archive &ar)

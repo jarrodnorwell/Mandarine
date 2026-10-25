@@ -605,7 +605,7 @@ void op_cop0(CPU *cpu, Opcode i) {
 
 // Coprocessor two
 void op_cop2(CPU *cpu, Opcode i) {
-    gte::command command = std::bit_cast<gte::command>(i.opcode);
+    gte::Command command = std::bit_cast<gte::Command>(i.opcode);
     if (i.opcode & (1 << 25)) {
         cpu->gte.command(command);
         return;

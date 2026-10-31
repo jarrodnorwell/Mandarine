@@ -49,6 +49,7 @@ namespace gte {
         constexpr bool ShiftFraction() const {
             return sf == gte::ShiftFraction::TWELVE_BIT_FRACTION;
         };
+        
     };
 
 }; //namespace gte

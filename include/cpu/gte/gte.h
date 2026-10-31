@@ -20,6 +20,7 @@
 
 #endif // TARGET_OS_IPHONE
 
+#include <array>
 #include <cstddef>
 #include <cstdint>
 #include <vector>
@@ -97,7 +98,7 @@ class GTE
     gte::Vector<int16_t> v[3];
     Reg32 rgbc;
     uint16_t otz = 0;
-    int16_t ir[4] = {0};
+    std::array<int16_t, 0x04> ir;
     gte::Vector<int16_t, int16_t, uint16_t> s[4];
     Reg32 rgb[3];
     uint32_t res1 = 0;    // prohibited
